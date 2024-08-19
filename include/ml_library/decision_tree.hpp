@@ -18,8 +18,8 @@ private:
         int feature_index;
         double threshold;
         double value;
-        std::shared_ptr<Node> left;
-        std::shared_ptr<Node> right;
+        std::shared_ptr<Node> left; // Double node
+        std::shared_ptr<Node> right; // I told you
         bool is_leaf;
     };
 

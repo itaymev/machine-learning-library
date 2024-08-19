@@ -12,15 +12,15 @@ public:
     Matrix(); // Default constructor
     Matrix(int rows, int cols);
     Matrix(const std::vector<std::vector<double>>& values);
-    Matrix transpose() const;
-    Matrix inverse() const;
-    Matrix operator*(const Matrix& other) const;
+    Matrix transpose() const; 
+    Matrix inverse() const; 
+    Matrix operator*(const Matrix& other) const; 
     Vector operator*(const Vector& vec) const;
     std::vector<double>& operator[](int index);
     const std::vector<double>& operator[](int index) const;
     int rows() const;
     int cols() const;
-    void push_back(const std::vector<double>& row); // Add this line
+    void push_back(const std::vector<double>& row);
 
 private:
     std::vector<std::vector<double>> values_;
@@ -37,7 +37,7 @@ public:
     double& operator[](int index);
     const double& operator[](int index) const;
     int size() const;
-    void push_back(double value); // Add this line
+    void push_back(double value);
 
     std::vector<double>::iterator begin();
     std::vector<double>::iterator end();

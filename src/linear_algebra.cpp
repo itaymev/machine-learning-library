@@ -1,17 +1,22 @@
 #include "linear_algebra.hpp"
 #include <stdexcept>
 #include <cmath>
-#include <algorithm> // for std::swap
+#include <algorithm>
 
 namespace ml_library {
 
 // Matrix class implementation
-Matrix::Matrix() : values_(0, std::vector<double>(0)) {} // Default constructor
 
+// Default constructor
+Matrix::Matrix() : values_(0, std::vector<double>(0)) {}
+
+// Constructor with specified dimensions
 Matrix::Matrix(int rows, int cols) : values_(rows, std::vector<double>(cols)) {}
 
+// Constructor with specified values
 Matrix::Matrix(const std::vector<std::vector<double>>& values) : values_(values) {}
 
+// Transpose the matrix
 Matrix Matrix::transpose() const {
     int rows = this->rows();
     int cols = this->cols();
@@ -24,6 +29,7 @@ Matrix Matrix::transpose() const {
     return result;
 }
 
+// Invert the matrix
 Matrix Matrix::inverse() const {
     int n = this->rows();
     if (n != this->cols()) {
@@ -35,6 +41,7 @@ Matrix Matrix::inverse() const {
     return result;
 }
 
+// Multiply two matrices
 Matrix Matrix::operator*(const Matrix& other) const {
     if (this->cols() != other.rows()) {
         throw std::invalid_argument("Matrix dimensions do not match for multiplication");
@@ -54,6 +61,7 @@ Matrix Matrix::operator*(const Matrix& other) const {
     return result;
 }
 
+// Multiply a matrix by a vector
 Vector Matrix::operator*(const Vector& vec) const {
     if (this->cols() != vec.size()) {
         throw std::invalid_argument("Matrix and vector dimensions do not match for multiplication");
@@ -69,6 +77,7 @@ Vector Matrix::operator*(const Vector& vec) const {
     return result;
 }
 
+// Index matrix
 std::vector<double>& Matrix::operator[](int index) {
     if (index < 0 || index >= this->rows()) {
         throw std::out_of_range("Matrix index out of range");
@@ -76,6 +85,7 @@ std::vector<double>& Matrix::operator[](int index) {
     return values_[index];
 }
 
+// Const index
 const std::vector<double>& Matrix::operator[](int index) const {
     if (index < 0 || index >= this->rows()) {
         throw std::out_of_range("Matrix index out of range");
@@ -91,6 +101,7 @@ int Matrix::cols() const {
     return values_.empty() ? 0 : values_[0].size();
 }
 
+// Push rows to add a row to the matrix
 void Matrix::push_back(const std::vector<double>& row) {
     if (!values_.empty() && row.size() != values_[0].size()) {
         throw std::invalid_argument("Row size does not match matrix column size");
@@ -99,12 +110,17 @@ void Matrix::push_back(const std::vector<double>& row) {
 }
 
 // Vector class implementation
-Vector::Vector() : values_(0) {} // Default constructor
 
+// Default constructor
+Vector::Vector() : values_(0) {}
+
+// Constructor with specified size
 Vector::Vector(int size) : values_(size) {}
 
+// Constructor with specified values
 Vector::Vector(const std::vector<double>& values) : values_(values) {}
 
+// Compute the dot product of two vectors
 double Vector::dot(const Vector& other) const {
     if (this->size() != other.size()) {
         throw std::invalid_argument("Vector sizes do not match for dot product");
@@ -116,6 +132,7 @@ double Vector::dot(const Vector& other) const {
     return result;
 }
 
+// Add two vectors
 Vector Vector::operator+(const Vector& other) const {
     if (this->size() != other.size()) {
         throw std::invalid_argument("Vector sizes do not match for addition");
@@ -127,6 +144,7 @@ Vector Vector::operator+(const Vector& other) const {
     return result;
 }
 
+// Subtract two vectors
 Vector Vector::operator-(const Vector& other) const {
     if (this->size() != other.size()) {
         throw std::invalid_argument("Vector sizes do not match for subtraction");
@@ -138,6 +156,7 @@ Vector Vector::operator-(const Vector& other) const {
     return result;
 }
 
+// Index vector
 double& Vector::operator[](int index) {
     if (index < 0 || index >= this->size()) {
         throw std::out_of_range("Vector index out of range");
@@ -145,6 +164,7 @@ double& Vector::operator[](int index) {
     return values_[index];
 }
 
+// Const index
 const double& Vector::operator[](int index) const {
     if (index < 0 || index >= this->size()) {
         throw std::out_of_range("Vector index out of range");

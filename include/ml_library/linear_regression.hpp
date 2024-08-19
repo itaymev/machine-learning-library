@@ -8,7 +8,7 @@ namespace ml_library {
 class LinearRegression {
 public:
     LinearRegression();
-    void fit(const Matrix& X, const Vector& y);
+    void fit(const Matrix& X, const Vector& y); // Model fit declaration
     Vector predict(const Matrix& X) const;
 
 private:
